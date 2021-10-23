@@ -33,6 +33,8 @@ import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
 import org.apache.http.conn.ssl.X509HostnameVerifier;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -187,7 +189,18 @@ public class AdvancedSslSocketFactory implements SecureProtocolSocketFactory {
     }
 
     private InetAddress getInetAddressForHost(String host) throws UnknownHostException {
-        return InetAddress.getByName(host);
+        InetAddress address = InetAddress.getByName(host);
+        if (address instanceof Inet6Address) {
+            InetAddress[] inetAddressArray = InetAddress.getAllByName(host);
+            for (InetAddress inetAddress : inetAddressArray) {
+                if (inetAddress instanceof Inet4Address) {
+                    address = inetAddress;
+                    break;
+                }
+            }
+        }
+
+        return address;
     }
 
     /**
