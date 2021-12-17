@@ -1,7 +1,7 @@
 import com.github.spotbugs.snom.SpotBugsTask
 
 buildscript {
-    ext.kotlin_version = '1.6.0'
+    ext.kotlin_version = '1.6.10'
     ext.junit_version = '4.13.2'
     ext.jacoco_version = '0.8.7'
     repositories {
@@ -13,9 +13,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath 'com.hiya:jacoco-android:0.2'
-        classpath 'com.github.spotbugs.snom:spotbugs-gradle-plugin:4.8.0'
+        classpath 'com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.19.0"
         classpath "org.jacoco:org.jacoco.core:$jacoco_version"
@@ -77,9 +77,9 @@ dependencies {
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
-    ktlint "com.pinterest:ktlint:0.43.1"
+    ktlint "com.pinterest:ktlint:0.43.2"
 
-    implementation "androidx.core:core-ktx:1.6.0"
+    implementation "androidx.core:core-ktx:1.7.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
@@ -87,7 +87,7 @@ dependencies {
 
     // dependencies for tests
     testImplementation "junit:junit:$junit_version"
-    testImplementation 'org.mockito:mockito-core:4.1.0'
+    testImplementation 'org.mockito:mockito-core:4.2.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 
     // dependencies for instrumented tests
@@ -102,7 +102,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     androidTestImplementation 'commons-io:commons-io:2.11.0'
-    androidTestImplementation 'net.bytebuddy:byte-buddy:1.12.2'
+    androidTestImplementation 'net.bytebuddy:byte-buddy:1.12.5'
 }
 
 spotbugs {
@@ -128,7 +128,7 @@ tasks.withType(SpotBugsTask){task ->
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     sourceSets {
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
